@@ -20,8 +20,13 @@ class App extends React.Component {
         if (!students.find((current) => {
             return current.carnet === student.carnet;
         })) {
-            students.push(student);
+            if(student.carnet.length > 8){
+                this.setState({ err: "El carnet no es valido" })
+            }else{
+                students.push(student);
             this.setState({ students, err: '' });
+            }
+            
         } else {
             this.setState({ err: "El estudiante ya existe" })
         }
